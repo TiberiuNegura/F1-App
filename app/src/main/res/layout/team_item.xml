@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#1E1E1E"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp">
+
+    <!-- ImageView for the Team Logo -->
+    <ImageView
+        android:id="@+id/teamImage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Team logo"
+        android:layout_marginEnd="12dp" />
+
+    <!-- TextView for the Team Name -->
+    <TextView
+        android:id="@+id/teamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Team name"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</LinearLayout>

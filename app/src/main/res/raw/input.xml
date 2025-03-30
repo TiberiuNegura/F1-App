@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<team>
+    <name>Ferrari</name>
+    <image>ferrari</image>
+    <wins>15</wins>
+    <podiums>30</podiums>
+    <championships>3</championships>
+    <founded_year>1995</founded_year>
+    <country>Italy</country>
+    <team_principal>Fred</team_principal>
+    <web_url>https://www.ferrari.com/en-EN/formula1</web_url>>
+    <drivers>
+        <driver>
+            <name>Leclerc</name>
+            <number>16</number>
+            <image>hellyeah</image>
+        </driver>
+        <driver>
+            <name>Cosbos</name>
+            <number>33</number>
+            <image>hellyeah</image>
+        </driver>
+    </drivers>
+</team>

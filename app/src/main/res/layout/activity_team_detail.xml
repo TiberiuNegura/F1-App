@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="16dp">
+
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/back"
+        android:contentDescription="@string/back_button_desc"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp" />
+
+    <!-- Team Name -->
+    <TextView
+        android:id="@+id/teamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Team Name"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentTop="true"/>
+
+    <!-- Team Logo -->
+    <ImageView
+        android:id="@+id/teamLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@id/teamName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ferrari" /> <!-- Placeholder -->
+
+    <!-- Driver 1 details -->
+    <TextView
+        android:id="@+id/driver1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Driver 1: Number"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_below="@id/teamLogo"
+        android:layout_marginTop="8dp" />
+
+    <!-- Driver 2 details -->
+    <TextView
+        android:id="@+id/driver2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Driver 2: Number"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_below="@id/driver1"
+        android:layout_marginTop="8dp" />
+
+    <!-- Wins -->
+    <TextView
+        android:id="@+id/wins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wins: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_below="@id/driver2"
+        android:layout_marginTop="8dp" />
+
+    <!-- Podiums -->
+    <TextView
+        android:id="@+id/podiums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Podiums: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_below="@id/wins"
+        android:layout_marginTop="8dp" />
+
+    <!-- Championships -->
+    <TextView
+        android:id="@+id/championships"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Championships: 0"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_below="@id/podiums"
+        android:layout_marginTop="8dp" />
+
+    <!-- See More Button -->
+    <Button
+        android:id="@+id/seeMoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See More"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF0000"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_toStartOf="@id/goToWebButton"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Go to Web Page Button -->
+    <Button
+        android:id="@+id/goToWebButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to Web Page"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF0000"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
