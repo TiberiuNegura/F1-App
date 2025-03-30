@@ -6,6 +6,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TeamMoreDetailsActivity extends AppCompatActivity {
@@ -21,21 +24,38 @@ public class TeamMoreDetailsActivity extends AppCompatActivity {
         // Get data from intent
         Intent intent = getIntent();
         String driver1Name = intent.getStringExtra("driver1Name");
-        int driver1Image = intent.getIntExtra("driver1Image", R.drawable.hellyeah);
+        String driver1Image = intent.getStringExtra("driver1Image");
         String driver2Name = intent.getStringExtra("driver2Name");
-        int driver2Image = intent.getIntExtra("driver2Image", R.drawable.hellyeah);
-        String teamPrincipal = intent.getStringExtra("teamPrincipal");
+        String driver2Image = intent.getStringExtra("driver2Image");
+        String teamPrincipal = "Team principal: " + intent.getStringExtra("teamPrincipal");
         int yearFounded = intent.getIntExtra("yearFounded", 0);
-        String country = intent.getStringExtra("country");
+        String country = "Origin: " + intent.getStringExtra("country");
+        int imgId = 0;
 
-        // le iau dintr un fisier
-
-        // Set values
         ((TextView) findViewById(R.id.driver1Name)).setText(driver1Name);
-        ((ImageView) findViewById(R.id.driver1Image)).setImageResource(driver1Image);
+        imgId = this.getResources().getIdentifier(driver1Image, "drawable", this.getPackageName());
+        ImageView driver1ImageView = findViewById(R.id.driver1Image);
+        if (imgId == 0) {
+            Glide.with(this)
+                    .load(driver1Image)
+                    .placeholder(R.drawable.loading)
+                    .into(driver1ImageView);
+        } else {
+            driver1ImageView.setImageResource(imgId);
+        }
         ((TextView) findViewById(R.id.driver2Name)).setText(driver2Name);
-        ((ImageView) findViewById(R.id.driver2Image)).setImageResource(driver2Image);
-        ((TextView) findViewById(R.id.year)).setText(String.valueOf(yearFounded));
+        imgId = this.getResources().getIdentifier(driver2Image, "drawable", this.getPackageName());
+        ImageView driver2ImageView = findViewById(R.id.driver2Image);
+        if (imgId == 0) {
+            Glide.with(this)
+                    .load(driver2Image)
+                    .placeholder(R.drawable.loading)
+                    .into(driver2ImageView);
+        } else {
+            driver2ImageView.setImageResource(imgId);
+        }
+        String founded = "Founded: " + String.valueOf(yearFounded);
+        ((TextView) findViewById(R.id.year)).setText(founded);
         ((TextView) findViewById(R.id.country)).setText(country);
         ((TextView) findViewById(R.id.principal)).setText(teamPrincipal);
     }

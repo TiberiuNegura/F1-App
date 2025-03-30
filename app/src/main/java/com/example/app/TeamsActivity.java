@@ -2,6 +2,7 @@ package com.example.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,15 +57,13 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
         int imgDriver1Id = this.getResources().getIdentifier(team.getDriver1().getImagePath(), "drawable", this.getPackageName());
         int imgDriver2Id = this.getResources().getIdentifier(team.getDriver2().getImagePath(), "drawable", this.getPackageName());
 
-        int a = R.drawable.hellyeah;
-
         intent.putExtra("teamName", team.getName());
         intent.putExtra("teamLogo", team.getImagePath()); // Passing the image
         intent.putExtra("driver1Name", team.getDriver1().getName());
-        intent.putExtra("driver1Image", imgDriver1Id);
+        intent.putExtra("driver1Image", team.getDriver1().getImagePath());
         intent.putExtra("driver1Number", team.getDriver1().getNumber());
         intent.putExtra("driver2Name", team.getDriver2().getName());
-        intent.putExtra("driver2Image", imgDriver2Id);
+        intent.putExtra("driver2Image", team.getDriver2().getImagePath());
         intent.putExtra("driver2Number", team.getDriver2().getNumber());
         intent.putExtra("wins", team.getWins());
         intent.putExtra("podiums", team.getPodiums());

@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.app.entities.Driver;
 
 public class TeamDetailActivity extends AppCompatActivity {
 
@@ -35,13 +38,13 @@ public class TeamDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String teamNameStr = intent.getStringExtra("teamName");
-        int teamLogoResId = intent.getIntExtra("teamLogo", R.drawable.ferrari); // Default placeholder
+        String teamLogoResId = intent.getStringExtra("teamLogo"); // Default placeholder
         String driver1Name = intent.getStringExtra("driver1Name");
         int driver1Number = intent.getIntExtra("driver1Number", 0);
-        int driver1Image = intent.getIntExtra("driver1Image", R.drawable.hellyeah);
+        String driver1Image = intent.getStringExtra("driver1Image");
         String driver2Name = intent.getStringExtra("driver2Name");
         int driver2Number = intent.getIntExtra("driver2Number", 0);
-        int driver2Image = intent.getIntExtra("driver2Image", R.drawable.hellyeah);
+        String driver2Image = intent.getStringExtra("driver2Image");
         int winsCount = intent.getIntExtra("wins", 0);
         int podiumsCount = intent.getIntExtra("podiums", 0);
         int championshipsCount = intent.getIntExtra("championships", 0);
@@ -52,7 +55,16 @@ public class TeamDetailActivity extends AppCompatActivity {
 
         // Set data
         teamName.setText(teamNameStr);
-        teamLogo.setImageResource(teamLogoResId);
+        int imgId = this.getResources().getIdentifier(teamLogoResId, "drawable", this.getPackageName());
+        if(imgId == 0) {
+                Glide.with(this)
+                        .load(teamLogoResId)
+                        .placeholder(R.drawable.loading)
+                        .into(teamLogo);
+        } else {
+            teamLogo.setImageResource(imgId);
+        }
+
         driver1.setText( driver1Name + "(" + driver1Number + ")");
         driver2.setText( driver2Name + "(" + driver2Number + ")");
         wins.setText("Wins: " + winsCount);
