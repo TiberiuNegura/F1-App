@@ -6,24 +6,45 @@
     android:background="#121212"
     tools:context=".TeamsActivity">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teams"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:layout_margin="16dp"
-        android:textStyle="bold"
-        android:layout_marginTop="15dp"
-        android:padding="16dp"
-        />
+    <!-- Toolbar with Title & Add Button -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="Teams"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_weight="1" />
+
+        <!-- Add Button -->
+        <ImageButton
+            android:id="@+id/addTeam"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Add Team"
+            android:src="@drawable/add"
+            android:layout_gravity="end"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- RecyclerView for Teams -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/teamRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title"
-    android:padding="16dp" />
+        android:layout_below="@id/toolbar"
+        android:padding="16dp" />
 
 </RelativeLayout>

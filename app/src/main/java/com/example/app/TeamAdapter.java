@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,10 @@ import java.util.List;
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
     public interface TeamClickListener {
         void onTeamClick(int position);
+        void onEditClick(Team team);
+        void onDeleteClick(Team team);
+
+        void onAddClick();
     }
 
     private Context context;
@@ -55,11 +60,14 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     public class TeamViewHolder extends RecyclerView.ViewHolder {
         ImageView teamImage;
         TextView teamName;
+        ImageButton editButton, deleteButton;
 
         public TeamViewHolder(@NonNull View itemView) {
             super(itemView);
             teamImage = itemView.findViewById(R.id.teamImage);
             teamName = itemView.findViewById(R.id.teamName);
+            editButton = itemView.findViewById(R.id.editTeam);
+            deleteButton = itemView.findViewById(R.id.deleteTeam);
 
             itemView.setOnClickListener(v -> listener.onTeamClick(getAdapterPosition()));
         }

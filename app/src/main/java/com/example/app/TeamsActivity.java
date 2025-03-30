@@ -2,6 +2,7 @@ package com.example.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,6 +48,11 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
 
         adapter = new TeamAdapter(this, teams, this);
         recyclerView.setAdapter(adapter);
+
+        ImageButton addButton = findViewById(R.id.addTeam);
+        addButton.setOnClickListener(v -> {
+            onAddClick();
+        });
     }
 
     @Override
@@ -73,7 +79,22 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
         intent.putExtra("country", team.getCountry());
         intent.putExtra("yearFounded", team.getFoundedYear());
 
+        startActivity(intent);
+    }
 
+    @Override
+    public void onEditClick(Team team) {
+
+    }
+
+    @Override
+    public void onDeleteClick(Team team) {
+
+    }
+
+    @Override
+    public void onAddClick() {
+        Intent intent = new Intent(TeamsActivity.this, AddTeamActivity.class);
         startActivity(intent);
     }
 }
