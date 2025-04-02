@@ -30,9 +30,9 @@ public class TeamDetailActivity extends AppCompatActivity {
         teamLogo = findViewById(R.id.teamLogo);
         driver1 = findViewById(R.id.driver1);
         driver2 = findViewById(R.id.driver2);
-        wins = findViewById(R.id.wins);
-        podiums = findViewById(R.id.podiums);
-        championships = findViewById(R.id.championships);
+        wins = findViewById(R.id.winsValue);
+        podiums = findViewById(R.id.podiumsValue);
+        championships = findViewById(R.id.championshipsValue);
 
         // Retrieve data from intent
         Intent intent = getIntent();
@@ -65,11 +65,11 @@ public class TeamDetailActivity extends AppCompatActivity {
             teamLogo.setImageResource(imgId);
         }
 
-        driver1.setText( driver1Name + "(" + driver1Number + ")");
-        driver2.setText( driver2Name + "(" + driver2Number + ")");
-        wins.setText("Wins: " + winsCount);
-        podiums.setText("Podiums: " + podiumsCount);
-        championships.setText("Championships: " + championshipsCount);
+        driver1.setText( driver1Name + " (" + driver1Number + ")");
+        driver2.setText( driver2Name + " (" + driver2Number + ")");
+        wins.setText(String.valueOf(winsCount));
+        podiums.setText(String.valueOf(podiumsCount));
+        championships.setText(String.valueOf(championshipsCount));
 
         seeMoreButton = findViewById(R.id.seeMoreButton);
         webButton = findViewById(R.id.goToWebButton);

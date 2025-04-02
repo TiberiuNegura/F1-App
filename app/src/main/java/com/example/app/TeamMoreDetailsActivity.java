@@ -23,13 +23,14 @@ public class TeamMoreDetailsActivity extends AppCompatActivity {
 
         // Get data from intent
         Intent intent = getIntent();
+        String teamName = intent.getStringExtra("teamName");
         String driver1Name = intent.getStringExtra("driver1Name");
         String driver1Image = intent.getStringExtra("driver1Image");
         String driver2Name = intent.getStringExtra("driver2Name");
         String driver2Image = intent.getStringExtra("driver2Image");
-        String teamPrincipal = "Team principal: " + intent.getStringExtra("teamPrincipal");
+        String teamPrincipal = intent.getStringExtra("teamPrincipal");
         int yearFounded = intent.getIntExtra("yearFounded", 0);
-        String country = "Origin: " + intent.getStringExtra("country");
+        String country = intent.getStringExtra("country");
         int imgId = 0;
 
         ((TextView) findViewById(R.id.driver1Name)).setText(driver1Name);
@@ -54,7 +55,7 @@ public class TeamMoreDetailsActivity extends AppCompatActivity {
         } else {
             driver2ImageView.setImageResource(imgId);
         }
-        String founded = "Founded: " + String.valueOf(yearFounded);
+        String founded = String.valueOf(yearFounded);
         ((TextView) findViewById(R.id.year)).setText(founded);
         ((TextView) findViewById(R.id.country)).setText(country);
         ((TextView) findViewById(R.id.principal)).setText(teamPrincipal);

@@ -1,126 +1,303 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/material_dynamic_neutral10"
     android:padding="16dp">
 
-    <!-- Back Button -->
+    <!-- Back Button - Improved touch target -->
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/back"
         android:contentDescription="@string/back_button_desc"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="4dp" />
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back"
+        app:tint="@color/white" />
 
-    <!-- Team Name -->
+    <!-- Team Name - Enhanced typography -->
     <TextView
         android:id="@+id/teamName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Team Name"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentTop="true"/>
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Team Logo -->
-    <ImageView
-        android:id="@+id/teamLogo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="fitCenter"
-        android:layout_below="@id/teamName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/ferrari" /> <!-- Placeholder -->
-
-    <!-- Driver 1 details -->
-    <TextView
-        android:id="@+id/driver1"
+    <!-- Team Logo in Card - Enhanced with elevation and shape -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/teamLogoCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Driver 1: Number"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_below="@id/teamLogo"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/material_dynamic_neutral20"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/material_dynamic_neutral50"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/teamName">
 
-    <!-- Driver 2 details -->
-    <TextView
-        android:id="@+id/driver2"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/teamLogo"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ferrari"
+            android:transitionName="teamLogoTransition" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Team Info Card - Contains all stats -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/teamInfoCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Driver 2: Number"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_below="@id/driver1"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/material_dynamic_neutral20"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/material_dynamic_neutral50"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/teamLogoCard">
 
-    <!-- Wins -->
-    <TextView
-        android:id="@+id/wins"
-        android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <!-- Drivers Section Title -->
+            <TextView
+                android:id="@+id/driversTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drivers"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/material_dynamic_primary80"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Driver 1 Label -->
+            <TextView
+                android:id="@+id/driver1Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Driver 1:"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@color/material_dynamic_neutral60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/driversTitle" />
+
+            <!-- Driver 1 Value -->
+            <TextView
+                android:id="@+id/driver1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Charles Leclerc #16"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/driver1Label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/driver1Label" />
+
+            <!-- Driver 2 Label -->
+            <TextView
+                android:id="@+id/driver2Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Driver 2:"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="@color/material_dynamic_neutral60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/driver1" />
+
+            <!-- Driver 2 Value -->
+            <TextView
+                android:id="@+id/driver2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Carlos Sainz #55"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/driver2Label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/driver2Label" />
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/material_dynamic_neutral50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/driver2" />
+
+            <!-- Stats Section Title -->
+            <TextView
+                android:id="@+id/statsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Team Statistics"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/material_dynamic_primary80"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+            <!-- Stats Grid -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statsGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statsTitle">
+
+                <!-- Championships Label -->
+                <TextView
+                    android:id="@+id/championshipsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Championships"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/material_dynamic_neutral60"
+                    app:layout_constraintEnd_toEndOf="@id/championshipsValue"
+                    app:layout_constraintStart_toStartOf="@id/championshipsValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Championships Value -->
+                <TextView
+                    android:id="@+id/championshipsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/winsValue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/championshipsLabel" />
+
+                <!-- Wins Label -->
+                <TextView
+                    android:id="@+id/winsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wins"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/material_dynamic_neutral60"
+                    app:layout_constraintEnd_toEndOf="@id/winsValue"
+                    app:layout_constraintStart_toStartOf="@id/winsValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Wins Value -->
+                <TextView
+                    android:id="@+id/winsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="240"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/podiumsValue"
+                    app:layout_constraintStart_toEndOf="@id/championshipsValue"
+                    app:layout_constraintTop_toBottomOf="@id/winsLabel" />
+
+                <!-- Podiums Label -->
+                <TextView
+                    android:id="@+id/podiumsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Podiums"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/material_dynamic_neutral60"
+                    app:layout_constraintEnd_toEndOf="@id/podiumsValue"
+                    app:layout_constraintStart_toStartOf="@id/podiumsValue"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Podiums Value -->
+                <TextView
+                    android:id="@+id/podiumsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="773"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/winsValue"
+                    app:layout_constraintTop_toBottomOf="@id/podiumsLabel" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Action Buttons Container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Wins: 0"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_below="@id/driver2"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <!-- Podiums -->
-    <TextView
-        android:id="@+id/podiums"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Podiums: 0"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_below="@id/wins"
-        android:layout_marginTop="8dp" />
+        <!-- See More Button - Enhanced style -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/seeMoreButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/material_dynamic_primary70"
+            android:paddingVertical="12dp"
+            android:text="See More"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="@color/black"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/goToWebButton"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Championships -->
-    <TextView
-        android:id="@+id/championships"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Championships: 0"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_below="@id/podiums"
-        android:layout_marginTop="8dp" />
+        <!-- Go to Web Button - Enhanced style -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/goToWebButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/material_dynamic_primary70"
+            android:paddingVertical="12dp"
+            android:text="Team Website"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="@color/black"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/seeMoreButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- See More Button -->
-    <Button
-        android:id="@+id/seeMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="See More"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#FF0000"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_toStartOf="@id/goToWebButton"
-        android:layout_marginEnd="8dp" />
-
-    <!-- Go to Web Page Button -->
-    <Button
-        android:id="@+id/goToWebButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go to Web Page"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#FF0000"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentEnd="true" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

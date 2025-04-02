@@ -1,339 +1,527 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="@color/material_dynamic_neutral10"
+    android:padding="16dp">
 
-    <!-- Toolbar with Back Icon -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <!-- Back Button - Improved touch target -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back_button_desc"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back"
+        app:tint="@color/white" />
+
+    <!-- Page Title - Enhanced typography -->
+    <TextView
+        android:id="@+id/addTeamTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Add Team"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ScrollView for form content -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="?attr/colorPrimary"
-        app:navigationIcon="@drawable/back"
-        app:title="Teams"
-        app:titleTextColor="@android:color/white"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"/>
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/confirmAddTeam"
+        app:layout_constraintTop_toBottomOf="@id/addTeamTitle">
 
-    <!-- Form Content inside a ScrollView -->
-    <ScrollView
-        android:layout_below="@id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="24dp">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:divider="@drawable/divider"
-            android:showDividers="middle"
-            android:paddingBottom="24dp">
+            android:layout_height="wrap_content">
 
-            <!-- Team Section -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Team Name"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/teamNameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Image URL"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                app:startIconDrawable="@drawable/link"
-                app:startIconTint="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/teamImageInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
+            <!-- Team Info Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/teamInfoCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:divider="@drawable/divider_vertical"
-                android:showDividers="middle"
-                android:weightSum="2">
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@color/material_dynamic_neutral20"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/material_dynamic_neutral50"
+                app:strokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/FormInputStyle"
-                    android:layout_weight="1"
-                    android:hint="Wins"
-                    app:hintTextColor="@android:color/white"
-                    app:boxStrokeColor="@android:color/white"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/teamWinsInput"
+                    <!-- Team Info Section Title -->
+                    <TextView
+                        android:id="@+id/teamDetailsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Team Details"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:textColor="@color/material_dynamic_primary80"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Team Name Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/teamNameLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:inputType="number"/>
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="16dp"
+                        android:hint="Team Name"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/teamDetailsTitle">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/FormInputStyle"
-                    android:layout_weight="1"
-                    android:hint="Podiums"
-                    app:hintTextColor="@android:color/white"
-                    app:boxStrokeColor="@android:color/white"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/teamNameInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/teamPodiumsInput"
+                    <!-- Team Image URL Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/teamImageLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:inputType="number"/>
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                        android:layout_marginTop="16dp"
+                        android:hint="Image URL"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:startIconDrawable="@drawable/link"
+                        app:startIconTint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/teamNameLayout">
 
-            <!-- Championships -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Championships"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/teamImageInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/teamChampionshipsInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:inputType="number"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    <!-- Statistics Grid -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/statsGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/teamImageLayout">
 
-            <!-- Founded Year -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Founded Year"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                        <!-- Wins Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/winsLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:hint="Wins"
+                            app:boxStrokeColor="@color/material_dynamic_primary70"
+                            app:hintTextColor="@color/material_dynamic_primary70"
+                            android:textColorHint="@color/material_dynamic_primary70"
+                            app:layout_constraintEnd_toStartOf="@id/podiumsLayout"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/teamFoundedInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:inputType="number"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/teamWinsInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/white" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Country -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Country"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                        <!-- Podiums Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/podiumsLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:hint="Podiums"
+                            app:boxStrokeColor="@color/material_dynamic_primary70"
+                            app:hintTextColor="@color/material_dynamic_primary70"
+                            android:textColorHint="@color/material_dynamic_primary70"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/winsLayout"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/teamCountryInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/teamPodiumsInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/white" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Web page url"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <!-- Championships Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/championshipsLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Championships"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/statsGrid">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/webPageInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/teamChampionshipsInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Team Principal -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Team Principal"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <!-- Founded Year Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/foundedLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Founded Year"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/championshipsLayout">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/teamPrincipalInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/teamFoundedInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Driver 1 Section -->
-            <TextView
+                    <!-- Country Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/countryLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Country"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/foundedLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/teamCountryInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Web Page URL Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/webPageLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Web page URL"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:startIconDrawable="@drawable/link"
+                        app:startIconTint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/countryLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/webPageInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Team Principal Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/principalLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Team Principal"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/webPageLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/teamPrincipalInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Driver 1 Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/driver1Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DRIVER 1"
-                android:textColor="#BB86FC"
-                android:textSize="14sp"
-                android:textAllCaps="true"
-                android:letterSpacing="0.1"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"/>
-
-            <!-- Driver 1 Name -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Driver Name"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driver1NameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Driver 1 Number -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Driver Number"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driver1NumberInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:inputType="number"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Driver 1 Image -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Image URL"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                app:startIconDrawable="@drawable/image"
-                app:startIconTint="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driver1ImageInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Driver 2 Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="DRIVER 2"
-                android:textColor="#BB86FC"
-                android:textSize="14sp"
-                android:textAllCaps="true"
-                android:letterSpacing="0.1"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"/>
-
-            <!-- Driver 2 Name -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Driver Name"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driver2NameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Driver 2 Number -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Driver Number"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driver2NumberInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:inputType="number"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Driver 2 Image -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/FormInputStyle"
-                android:hint="Image URL"
-                app:hintTextColor="@android:color/white"
-                app:boxStrokeColor="@android:color/white"
-                app:startIconDrawable="@drawable/image"
-                app:startIconTint="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/driver2ImageInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Submit Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/confirmAddTeam"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
                 android:layout_marginTop="24dp"
-                android:text="Add Team"
-                android:textColor="@android:color/white"
-                app:icon="@drawable/add"
-                app:iconTint="@android:color/white"
-                app:backgroundTint="#3700B3"
-                app:cornerRadius="8dp"/>
+                app:cardBackgroundColor="@color/material_dynamic_neutral20"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/material_dynamic_neutral50"
+                app:strokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/teamInfoCard">
 
-        </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <!-- Driver 1 Section Title -->
+                    <TextView
+                        android:id="@+id/driver1Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Driver 1"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:textColor="@color/material_dynamic_primary80"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Driver 1 Name Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/driver1NameLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Driver Name"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/driver1Title">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/driver1NameInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Driver 1 Number Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/driver1NumberLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Driver Number"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/driver1NameLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/driver1NumberInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Driver 1 Image URL Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/driver1ImageLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Image URL"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:startIconDrawable="@drawable/image"
+                        app:startIconTint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/driver1NumberLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/driver1ImageInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Driver 2 Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/driver2Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/material_dynamic_neutral20"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/material_dynamic_neutral50"
+                app:strokeWidth="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/driver1Card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <!-- Driver 2 Section Title -->
+                    <TextView
+                        android:id="@+id/driver2Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Driver 2"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        android:textColor="@color/material_dynamic_primary80"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Driver 2 Name Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/driver2NameLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Driver Name"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/driver2Title">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/driver2NameInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Driver 2 Number Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/driver2NumberLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Driver Number"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/driver2NameLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/driver2NumberInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Driver 2 Image URL Input -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/driver2ImageLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:hint="Image URL"
+                        app:boxStrokeColor="@color/material_dynamic_primary70"
+                        app:hintTextColor="@color/material_dynamic_primary70"
+                        android:textColorHint="@color/material_dynamic_primary70"
+                        app:startIconDrawable="@drawable/image"
+                        app:startIconTint="@color/material_dynamic_primary70"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/driver2NumberLayout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/driver2ImageInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Add Team Button - Enhanced style -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirmAddTeam"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/material_dynamic_primary70"
+        android:paddingVertical="12dp"
+        android:text="Add Team"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="@color/black"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/add"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

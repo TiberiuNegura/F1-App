@@ -1,7 +1,9 @@
 package com.example.app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Xml;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.entities.Team;
-import com.example.app.utils.XMLTeamParser;
+import com.example.app.utils.XMLTeamManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TeamsActivity extends AppCompatActivity implements TeamAdapter.TeamClickListener {
@@ -19,8 +20,6 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
     RecyclerView recyclerView;
     TeamAdapter adapter;
     List<Team> teams;
-
-    XMLTeamParser parser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +29,9 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
         recyclerView = findViewById(R.id.teamRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        this.parser = new XMLTeamParser(this);
+        XMLTeamManager.readXml(this, "teams.xml");
 
-        teams = this.parser.getTeams();
+        teams = XMLTeamManager.getTeams();
 
 //        teams = new ArrayList<>();
 //        teams.add(new Team("Ferrari", R.drawable.ferrari));
@@ -53,6 +52,16 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
         addButton.setOnClickListener(v -> {
             onAddClick();
         });
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        teams = XMLTeamManager.getTeams();
+        adapter.setTeams(teams);
+
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -84,12 +93,35 @@ public class TeamsActivity extends AppCompatActivity implements TeamAdapter.Team
 
     @Override
     public void onEditClick(Team team) {
+        Intent intent = new Intent(this, AddTeamActivity.class);
+        intent.putExtra("isEdit", true);
 
+        intent.putExtra("teamName", team.getName());
+        intent.putExtra("teamLogo", team.getImagePath());
+        intent.putExtra("wins", team.getWins());
+        intent.putExtra("podiums", team.getPodiums());
+        intent.putExtra("championships", team.getChampionships());
+        intent.putExtra("yearFounded", team.getFoundedYear());
+        intent.putExtra("teamPrincipal", team.getTeamPrincipal());
+        intent.putExtra("country", team.getCountry());
+        intent.putExtra("web_url", team.getUrl());
+        intent.putExtra("driver1Name", team.getDriver1().getName());
+        intent.putExtra("driver1Number", team.getDriver1().getNumber());
+        intent.putExtra("driver1Image", team.getDriver1().getImagePath());
+        intent.putExtra("driver2Name", team.getDriver2().getName());
+        intent.putExtra("driver2Number", team.getDriver2().getNumber());
+        intent.putExtra("driver2Image", team.getDriver2().getImagePath());
+
+        startActivity(intent);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onDeleteClick(Team team) {
-
+        teams.remove(team);
+        XMLTeamManager.saveTeams(teams, this);
+        adapter.setTeams(teams);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

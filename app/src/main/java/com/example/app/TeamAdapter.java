@@ -11,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.app.entities.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
@@ -49,12 +51,35 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
         Team team = teams.get(position);
         holder.teamName.setText(team.getName());
         int imgId = context.getResources().getIdentifier(team.getImagePath(), "drawable", context.getPackageName());
-        holder.teamImage.setImageResource(imgId);
+        if (imgId == 0) {
+            Glide.with(this.context)
+                    .load(team.getImagePath())
+                    .placeholder(R.drawable.loading)
+                    .into(holder.teamImage);
+        } else {
+            holder.teamImage.setImageResource(imgId);
+        }
+
+        holder.deleteButton.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onDeleteClick(team);
+            }
+        });
+
+        holder.editButton.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onEditClick(team);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return teams.size();
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     public class TeamViewHolder extends RecyclerView.ViewHolder {

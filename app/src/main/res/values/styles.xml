@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Add these color definitions if you don't have colors.xml -->
+     Add these color definitions if you don't have colors.xml
     <color name="purple_200">#BB86FC</color>
     <color name="purple_500">#6200EE</color>
     <color name="input_box_stroke">#FFFFFF</color>
